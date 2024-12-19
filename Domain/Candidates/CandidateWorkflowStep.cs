@@ -51,7 +51,7 @@ public sealed class CandidateWorkflowStep
         ArgumentNullException.ThrowIfNull(user);
         ArgumentException.ThrowIfNullOrEmpty(feedback);
 
-        IsCanChangedStatus();
+        IsCanChangedStatus(user);
 
         Status = CandidateStatus.Approved;
         Feedback = feedback;
@@ -63,7 +63,7 @@ public sealed class CandidateWorkflowStep
         ArgumentNullException.ThrowIfNull(user);
         ArgumentException.ThrowIfNullOrEmpty(feedback);
 
-        IsCanChangedStatus();
+        IsCanChangedStatus(user);
 
         Status = CandidateStatus.Rejected;
         Feedback = feedback;
@@ -77,9 +77,14 @@ public sealed class CandidateWorkflowStep
         FeedbackDate = null;
     }
 
-    private void IsCanChangedStatus()
+    private void IsCanChangedStatus(User user)
     {
         if (Status != CandidateStatus.InProcessing)
+        {
+            throw new Exception(""); // todo: добавить нормальное сообщение
+        }
+
+        if (user.Id != UserId && user.RoleId != RoleId)
         {
             throw new Exception(""); // todo: добавить нормальное сообщение
         }

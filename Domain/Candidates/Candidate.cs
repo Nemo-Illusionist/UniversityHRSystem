@@ -21,6 +21,7 @@ public sealed class Candidate
     public Guid? ReferralId { get; private init; }
     public CandidateDocument Document { get; private init; }
     public CandidateWorkflow Workflow { get; private init; }
+    public CandidateStatus Status => Workflow.Status;
 
     internal static Candidate Create(
         Guid vacancyId,

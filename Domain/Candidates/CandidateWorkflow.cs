@@ -12,6 +12,7 @@ public sealed class CandidateWorkflow
     }
 
     public IReadOnlyCollection<CandidateWorkflowStep> Steps { get; private set; }
+    internal CandidateStatus Status => GetStatus();
 
     internal static CandidateWorkflow Create(IReadOnlyCollection<CandidateWorkflowStep> steps)
         => new(steps);
